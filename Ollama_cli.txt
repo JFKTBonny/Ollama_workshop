@@ -1,0 +1,137 @@
+######################
+OLLAMA CLI CHEAT SHEET
+######################
+
+Purpose
+*******
+
+        Common Ollama command-line instructions for managing local models and
+        running a local LLM for the Kubernetes Monitoring Agent.
+
+1. CHECK OLLAMA
+   ************
+
+        Check the installed version: ollama –version
+
+        Display available commands: ollama help
+
+        Display help for a specific command: ollama help run ollama help pull
+
+        Check whether the Ollama service responds: curl http://localhost:11434/api/tags
+
+        Start the Ollama server (when it is not already running): ollama serve
+
+        Note: On Linux, Ollama may already run as a systemd service. Check it
+        with: systemctl status ollama
+
+        Start the service: sudo systemctl start ollama
+
+        Enable it at boot: sudo systemctl enable ollama
+
+2. MANAGE LOCAL MODELS
+   *******************
+
+        List models downloaded locally: ollama list
+
+        Download a model: ollama pull llama3.2
+
+        Download another model: ollama pull mistral
+
+        Show model information: ollama show llama3.2
+
+        Show a model’s parameters: ollama show –parameters llama3.2
+
+        Show the model’s template: ollama show –template llama3.2
+
+        Copy a model under another name: ollama cp llama3.2 my-llama
+
+        Remove a local model: ollama rm my-llama
+
+3. RUN AND INTERACT WITH A MODEL
+   *****************************
+
+        Start an interactive chat: ollama run llama3.2
+
+        Run a different model: ollama run mistral
+
+        Send a one-off prompt: ollama run llama3.2 “Explain Kubernetes pod
+        readiness.”
+
+        Exit an interactive Ollama session: /bye
+
+        Display help inside an interactive session: /?
+
+        Note: Commands beginning with / are entered inside the interactive
+        ollama run session, not at the normal Linux shell prompt.
+
+4. CHECK RUNNING MODELS
+   ********************
+
+        List models currently loaded in memory: ollama ps
+
+        Stop a running model: ollama stop llama3.2
+
+5. CREATE A CUSTOM MODEL
+   *********************
+
+        Create a file named Modelfile containing, for example: FROM llama3.2
+        PARAMETER temperature 0.2
+
+        Build a model from that Modelfile: ollama create k8s-assistant -f
+        Modelfile
+
+        Run the custom model: ollama run k8s-assistant
+
+6. USE OLLAMA WITH THE PYTHON MONITORING AGENT
+   *******************************************
+
+        The agent in main.py sends HTTP requests to Ollama’s local API:
+        http://localhost:11434/api/chat
+
+        Check that the API is reachable: curl http://localhost:11434/api/tags
+
+        Set the model used by the Python application: export OLLAMA_MODEL=llama3.2
+
+        
+
+        Use another installed model: export OLLAMA_MODEL=mistral python3 main.py
+
+        The Python code uses the OLLAMA_MODEL environment variable. If it is not
+        set, the application defaults to llama3.2.
+
+    Important: - Download the model before selecting it in the Python application. 
+               - Keep the Ollama service running while the agent is using it. 
+               - The model runs locally; the Python application connects to localhost. 
+               - Ollama interprets the Kubernetes data collected by Python.
+                
+
+7. QUICK TROUBLESHOOTING
+   *********************
+
+        If the command ‘ollama’ is not found: which ollama ollama –version
+
+        If the local API is unavailable: systemctl status ollama sudo systemctl
+        start ollama curl http://localhost:11434/api/tags
+
+        If the requested model is missing: ollama list ollama pull llama3.2
+
+        If a model is still loaded and using resources: ollama ps ollama stop
+        llama3.2
+
+8. USEFUL COMMAND SUMMARY
+   **********************
+
+    ollama --version       Check version
+    ollama help            List CLI help
+    ollama serve           Start the server
+    ollama list            List downloaded models
+    ollama pull MODEL      Download a model
+    ollama run MODEL       Run a model
+    ollama show MODEL      Inspect model information
+    ollama ps              List loaded models
+    ollama stop MODEL      Stop a loaded model
+    ollama cp SOURCE DEST  Copy a model
+    ollama rm MODEL        Remove a model
+    ollama create NAME     Create a model from a Modelfile
+
+End of cheat sheet.
