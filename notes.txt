@@ -2,53 +2,54 @@
 Local LLMs and Ollama
 #####################
 
-*** A local LLM is a large language model that runs directly on your own  computer...
-    Instead of sending prompts and data to a remote cloud service, install the model locally and interact with it on your machine...
+A local LLM is a large language model that runs directly on your own computer.
+Instead of sending prompts and data to a remote cloud service, you install the model locally and interact with it on your machine.
 
-    *** Advantages:
-        1- More control over privacy, because your prompts and data do not need to leave your computer...
-        2- Lowwer ongoing cost, since you are not relying on paid API usage for every request...
-        3- Better availability for experimentation, because you are not limited by rate caps or external service outages...
-        4- More freedom to test ideas quickly while developing your tools and workflows...
+Advantages:
+1. More control over privacy, because your prompts and data do not need to leave your computer.
+2. Lower ongoing cost, since you are not relying on paid API usage for every request.
+3. Better availability for experimentation, because you are not limited by rate caps or external service outages.
+4. More freedom to test ideas quickly while developing your tools and workflows.
 
-    *** Ollama is the tools that simplifies the process of working with local models...
-        Rather than manually managing model files and runtime details, you can use ollama to install, run, and switch between models from one place...
-        Ollama provides both CLI and  an API...This means that you can use it interactively bfrom the terminal, then connect
-        to it from python applications in much the same way you would connect to a hosted AI service...
+Ollama is a tool that simplifies the process of working with local models.
+Rather than manually managing model files and runtime details, you can use Ollama to install, run, and switch between models from one place.
+Ollama provides both a CLI and an API. This means you can use it interactively from the terminal and also connect to it from Python applications in much the same way you would connect to a hosted AI service.
 
-        Ollama helps:
-         1- Installing local language models...
-         2- Running models on your machine...
-         3- Switching between different models...
-         4- Sending prompts through the command line...
-         5- Building applications that communicate with a local model through an API...    
+Ollama helps with:
+1. Installing local language models.
+2. Running models on your machine.
+3. Switching between different models.
+4. Sending prompts through the command line.
+5. Building applications that communicate with a local model through an API.
 
-Ollama linux install: https://docs.ollama.com/linux
-Ollama Library: https://ollama.com/library  
-Ollama Download: https://ollama.com/download
+Ollama Linux install: https://docs.ollama.com/linux
+Ollama library: https://ollama.com/library
+Ollama download: https://ollama.com/download
 Hardware support: https://docs.ollama.com/gpu
-Ollama  docker:  https://docs.ollama.com/docker
-Ollama Github Repo: https://github.com/ollama/ollama
+Ollama Docker: https://docs.ollama.com/docker
+Ollama GitHub repo: https://github.com/ollama/ollama
 Ollama API introduction: https://docs.ollama.com/api/introduction
 
 ########################################################################################################
-Sending Images to a Multimodal Model:
-    Text is only part of what Ollama can do...
-    Some models are multimodal, which means they can accept both text and images...
-    The image stays on your computer, no external API key is required, and the process can still work without an internat connection...
+Sending Images to a Multimodal Model
 
-    That makes local multimodal nodels specially useful for offline tools, private workflows, 
-    and experiments where you can full control over the data being processed...
+Text is only part of what Ollama can do.
+Some models are multimodal, which means they can accept both text and images.
+The image stays on your computer, no external API key is required, and the process can still work without an internet connection.
 
-    *********** Vision xsupport and supported models:
-        Vision is a model-level capability rather than something Ollama enables on its own...
-        The official capability page lists which models accept image input and how to send images through the API...
-        1- Sending images follows the Base64 pattern...
-           THe images field on /api/generate and /api/chat accepts a list of Base64 strings, and the model returns a normal text response...
+That makes local multimodal models especially useful for offline tools, private workflows,
+and experiments where you have full control over the data being processed.
 
-        2- Choosing a model: it matters because not every model is multimodal...
-           Follow the docs to look at models with vision-capability that can be used in your python code...
-           vision capability: https://docs.ollama.com/capabilities/vision
+Vision support and supported models:
+Vision is a model-level capability rather than something Ollama enables on its own.
+The official capability page lists which models accept image input and how to send images through the API.
+
+1. Sending images follows the Base64 pattern.
+   The `images` field on `/api/generate` and `/api/chat` accepts a list of Base64 strings, and the model returns a normal text response.
+
+2. Choosing a model matters because not every model is multimodal.
+   Follow the documentation to look at models with vision capability that can be used in your Python code.
+   Vision capability: https://docs.ollama.com/capabilities/vision
            
                
 
